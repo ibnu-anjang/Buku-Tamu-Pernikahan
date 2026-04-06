@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+    --primary-red: #9B1B30;
+    --soft-pink: #F8C8DC;
+    --pale-pink: #FFF0F5;
+    --rose-gold: #D4AF37;
+    --deep-red: #580000;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, var(--pale-pink) 0%, #ffffff 100%);
+    color: #444;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+.wedding-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(155, 27, 48, 0.1);
+    box-shadow: 0 10px 30px rgba(155, 27, 48, 0.1);
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--primary-red);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(155, 27, 48, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--deep-red);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(155, 27, 48, 0.4);
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-red);
+}
+
+.guest-entry {
+    border-left: 4px solid var(--primary-red);
+    padding: 20px;
+    background: white;
+    margin-bottom: 20px;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.floral-pattern {
+    position: fixed;
+    z-index: -1;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.top-right { top: -50px; right: -50px; transform: rotate(180deg); }
+.bottom-left { bottom: -50px; left: -50px; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
