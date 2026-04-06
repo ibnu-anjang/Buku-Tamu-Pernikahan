@@ -1,58 +1,42 @@
-# 📘 Panduan Menjalankan Buku Tamu Pernikahan
+# 📘 Cara Menjalankan Buku Tamu Pernikahan (Lengkap)
 
-File ini berisi instruksi sederhana untuk menjalankan aplikasi di dua lingkungan berbeda: **Docker (Laptop Saya)** dan **Laragon (Laptop Teman)**.
+Proyek ini telah dikonfigurasi menggunakan **SQLite** agar bisa dijalankan di laptop mana pun tanpa perlu setting MySQL.
 
 ---
 
-## 💻 1. Di Laptop Saya (Gunakan Docker)
+## 💻 1. Di Laptop Saya (Gunakan Docker Sail)
 Jika Anda menggunakan Docker Desktop, ikuti langkah ini:
 
-1. **Siapkan Dependensi**:
-   Buka terminal di folder project, lalu jalankan:
-   ```bash
-   docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/html laravelsail/php83-composer:latest composer install
-   ```
-2. **Nyalakan Docker (Sail)**:
+1. **Jalankan Project**:
    ```bash
    ./vendor/bin/sail up -d
    ```
-3. **Migrasi Database**:
+2. **Install Asset & Database**:
    ```bash
+   ./vendor/bin/sail npm install
+   ./vendor/bin/sail npm run build
    ./vendor/bin/sail artisan migrate
    ```
-4. **Buka Browser**:
-   Kunjungi [http://localhost](http://localhost).
+3. **Buka Browser**:
+   Akses `http://localhost`.
 
 ---
 
 ## 🖥️ 2. Di Laptop Teman (Gunakan Laragon)
-Jika teman Anda menggunakan Windows dengan Laragon, ikuti langkah ini:
+Pastikan teman Anda sudah memiliki **PHP**, **Composer**, dan **Node.js** terinstall di Laragonnya.
 
-1. **Pindah Project**:
-   Copy folder `Buku-Tamu` ke dalam folder `C:\laragon\www\`.
-2. **Buka Terminal di Laragon**:
-   Klik kanan folder project, pilih "Open Terminal" atau "Open Folder in Terminal".
-3. **Install Dependensi**:
+1. **Copy Project**:
+   Pindahkan folder `Buku-Tamu-Pernikahan` ke dalam folder `C:\laragon\www\`.
+2. **Setup dari Terminal**:
+   Klik kanan folder proyek di Laragon, lalu pilih "Terminal":
    ```bash
    composer install
    npm install && npm run build
-   ```
-4. **Setup Database (SQLite)**:
-   Aplikasi ini menggunakan SQLite agar teman Anda tidak perlu repot setup database MySQL di Laragon.
-   Cukup pastikan file `.env` berisi:
-   ```env
-   DB_CONNECTION=sqlite
-   ```
-5. **Migrasi Database**:
-   ```bash
    php artisan migrate
-   ```
-6. **Jalankan Aplikasi**:
-   ```bash
    php artisan serve
    ```
-7. **Buka Browser**:
-   Kunjungi [http://127.0.0.1:8000](http://127.0.0.1:8000).
+3. **Buka Browser**:
+   Akses `http://127.0.0.1:8000`.
 
 ---
 
@@ -63,7 +47,15 @@ Aplikasi ini sudah mengikuti konsep **MVC (Model-View-Controller)** yang bersih:
     *   Mengatur interaksi data dengan database (SQLite).
 2.  **VIEW** (`resources/views/welcome.blade.php`):
     *   Tampilan website (HMTL/CSS/JS) yang dilihat oleh tamu.
-3.  **CONTROLLER** (`app/Http/Controllers/GuestbookController.php`):
-    *   Logika utama untuk menampilkan data & menyimpan ucapan baru.
-4.  **ROUTES** (`routes/web.php`):
-    *   Alamat URL untuk mengakses fitur aplikasi.
+3.  **VIEW ADMIN** (`resources/views/admin.blade.php`):
+    *   Tampilan tabel untuk pengelolaan data (CRUD).
+4.  **CONTROLLER** (`app/Http/Controllers/GuestbookController.php`):
+    *   Logika utama untuk menampilkan data, menyimpan ucapan, dan fitur admin (CRUD).
+5.  **ROUTES** (`routes/web.php`):
+    *   Alamat URL untuk mengakses fitur aplikasi (User & Admin).
+
+---
+
+## 🔒 Akses Admin Dashboard
+Anda bisa mengelola, mengedit, atau menghapus ucapan tamu melalui panel admin di:
+👉 **`http://localhost/admin`** (Docker) atau **`http://127.0.0.1:8000/admin`** (Laragon).

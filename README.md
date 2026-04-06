@@ -1,72 +1,51 @@
-# 💍 Premium Wedding Guestbook (Buku Tamu Pernikahan)
+# 💍 Premium Wedding Guestbook (Buku Tamu Digital)
 
-Sebuah aplikasi Buku Tamu Pernikahan modern dengan desain elegan bertema **Romantic Red & Pink**. Aplikasi ini dirancang agar mudah dijalankan di berbagai lingkungan (Docker maupun Laragon).
+Aplikasi Buku Tamu Pernikahan modern dengan konsep **Digital Invitation** yang elegan, dibangun menggunakan Laravel 11.
 
-## ✨ Fitur
-- **Desain Premium**: Tipografi elegan, animasi halus, dan skema warna romantis.
-- **Formulir Tamu**: Nama, Telepon, Alamat, dan Pesan/Doa.
-- **Feed Pesan**: Daftar ucapan dari tamu yang diperbarui secara real-time.
-- **Portabilitas Tinggi**: Menggunakan SQLite agar bisa langsung jalan tanpa setup database rumit.
-
----
+## ✨ Fitur Utama
+- **Digital Invitation Experience**: Halaman pembuka eksklusif untuk tamu.
+- **Premium UI/UX**: Desain bertema *Romantic Red & Pink* dengan aset floral dan font serif yang artistik.
+- **Full CRUD Admin Dashboard**: Kelola pesan tamu (Lihat, Edit, Hapus) melalui antarmuka admin di `/admin`.
+- **Zero-Config Database**: Menggunakan **SQLite**, sehingga Anda tidak perlu setup MySQL. Cukup clone dan jalankan.
+- **Multi-Platform Support**: Siap dijalankan di **Docker (Laravel Sail)** maupun **Laragon (Windows/Mac)**.
 
 ## 🚀 Cara Menjalankan
 
-### Melalui Docker (Rekomendasi untuk Linux/Mac)
-Jika Anda menggunakan Docker dan Laravel Sail:
+### A. Menggunakan Docker (Laravel Sail) - Laptop Saya
+1. **Clone Repository**:
+   ```bash
+   git clone git@github.com:ibnu-anjang/Buku-Tamu-Pernikahan.git
+   cd Buku-Tamu-Pernikahan
+   ```
+2. **Install Dependensi & Jalankan**:
+   ```bash
+   ./vendor/bin/sail up -d
+   ./vendor/bin/sail npm install
+   ./vendor/bin/sail npm run build
+   ./vendor/bin/sail artisan migrate
+   ```
+3. **Akses Aplikasi**:
+   - Web: `http://localhost`
+   - Admin: `http://localhost/admin`
 
-1.  **Clone repositori**:
-    ```bash
-    git clone <url-repo>
-    cd Buku-Tamu
-    ```
-2.  **Install dependensi** (Jika belum ada folder vendor):
-    ```bash
-    docker run --rm \
-        -u "$(id -u):$(id -g)" \
-        -v "$(pwd):/var/www/html" \
-        -w /var/www/html \
-        laravelsail/php83-composer:latest \
-        composer install
-    ```
-3.  **Jalankan Sail**:
-    ```bash
-    ./vendor/bin/sail up -d
-    ```
-4.  **Migrasi Database**:
-    ```bash
-    ./vendor/bin/sail artisan migrate
-    ```
-5.  **Akses Aplikasi**: Buka [http://localhost](http://localhost) di browser Anda.
+### B. Menggunakan Laragon (Windows) - Laptop Teman
+1. **Persiapan**: Pastikan PHP (8.2+), Composer, dan Node.js sudah terinstall di Laragon.
+2. **Setup Project**:
+   ```bash
+   composer install
+   npm install && npm run build
+   php artisan migrate
+   php artisan serve
+   ```
+3. **Akses Aplikasi**:
+   - Web: `http://127.0.0.1:8000`
+   - Admin: `http://127.0.0.1:8000/admin`
 
----
-
-### Melalui Laragon (Rekomendasi untuk Windows)
-Jika Anda menggunakan Laragon:
-
-1.  **Clone repositori** ke dalam folder `C:\laragon\www\Buku-Tamu`.
-2.  **Buka Terminal** di folder tersebut.
-3.  **Install dependensi**:
-    ```bash
-    composer install
-    npm install && npm run build
-    ```
-4.  **Setup Environment**:
-    Salin `.env.example` menjadi `.env` (jika belum ada). Pastikan `DB_CONNECTION=sqlite`.
-5.  **Migrasi Database**:
-    ```bash
-    php artisan migrate
-    ```
-6.  **Jalankan Server**:
-    ```bash
-    php artisan serve
-    ```
-7.  **Akses Aplikasi**: Buka [http://127.0.0.1:8000](http://127.0.0.1:8000) di browser Anda.
+## 🏗️ Struktur MVC (Gunakan untuk Presentasi)
+- **Model** (`app/Models/GuestbookEntry.php`): Mengatur data di database SQLite.
+- **View** (`resources/views/welcome.blade.php`): Tampilan utama tamu.
+- **View Admin** (`resources/views/admin.blade.php`): Tampilan dashboard pengelola.
+- **Controller** (`app/Http/Controllers/GuestbookController.php`): Logika bisnis (simpan, tampil, hapus data).
 
 ---
-
-## 🛠 Teknologi yang Digunakan
-- **Laravel 11+**
-- **SQLite** (Default DB untuk kemudahan)
-- **Tailwind CSS** & Custom Premium Styling
-- **Laravel Sail** (Docker Setup)
+Dibuat oleh **Antigravity** untuk hari bahagia Anda. ❤️💍

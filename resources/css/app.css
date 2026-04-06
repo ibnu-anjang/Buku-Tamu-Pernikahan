@@ -1,90 +1,230 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-    --primary-red: #9B1B30;
-    --soft-pink: #F8C8DC;
-    --pale-pink: #FFF0F5;
-    --rose-gold: #D4AF37;
-    --deep-red: #580000;
+    --primary-red: #8b0000;
+    --deep-red: #4a0000;
+    /* Tambahkan ini agar gradient jalan */
+    --soft-pink: #fff0f5;
+    --gold: #d4af37;
+    --dark: #2d2d2d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, var(--pale-pink) 0%, #ffffff 100%);
-    color: #444;
-    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--dark);
+    line-height: 1.6;
+    background-color: #fafafa;
     overflow-x: hidden;
 }
 
-h1, h2, h3, .font-serif {
+h1,
+h2,
+h3,
+.font-serif {
     font-family: 'Playfair Display', serif;
 }
 
-.wedding-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(155, 27, 48, 0.1);
-    box-shadow: 0 10px 30px rgba(155, 27, 48, 0.1);
-    border-radius: 20px;
-    transition: transform 0.3s ease;
+/* Digital Invitation Cover */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('/assets/wedding_bg.png') no-repeat center center;
+    background-size: cover;
+    text-align: center;
+    padding: 20px;
+    position: relative;
 }
 
-.btn-primary {
-    background: var(--primary-red);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 50px;
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    color: var(--primary-red);
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
     font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(155, 27, 48, 0.3);
 }
 
-.btn-primary:hover {
-    background: var(--deep-red);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(155, 27, 48, 0.4);
+/* Main Content Area */
+.main-wrapper {
+    max-width: 1100px;
+    margin: -50px auto 100px;
+    position: relative;
+    z-index: 5;
+    padding: 0 20px;
+}
+
+.wedding-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Form Styling */
+.form-title {
+    font-size: 2rem;
+    color: var(--primary-red);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #666;
 }
 
 .form-input {
     width: 100%;
-    padding: 12px 15px;
+    padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    transition: border-color 0.3s ease;
+    border-radius: 12px;
+    transition: all 0.3s;
+    background: #fdfdfd;
 }
 
 .form-input:focus {
+    border-color: var(--gold);
     outline: none;
-    border-color: var(--primary-red);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
 }
 
-.guest-entry {
-    border-left: 4px solid var(--primary-red);
-    padding: 20px;
+.btn-submit {
+    /* Solid fallback first */
+    background-color: var(--primary-red);
+    background: linear-gradient(45deg, #4a0000, #8b0000);
+    color: #ffffff !important;
+    
+    border: 2px solid var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 50px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 18px;
+    font-weight: 700;
+    
+    /* Stronger shadow for depth */
+    box-shadow: 0 10px 20px rgba(74, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    transform: scale(1.01);
+    box-shadow: 0 15px 30px rgba(74, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
+
+/* Message Feed */
+.messages-section {
+    margin-top: 80px;
+}
+
+.message-card {
     background: white;
-    margin-bottom: 20px;
-    border-radius: 0 15px 15px 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-left: 5px solid var(--gold);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s;
 }
 
-.floral-pattern {
-    position: fixed;
-    z-index: -1;
-    opacity: 0.1;
-    pointer-events: none;
+.message-card:hover {
+    transform: translateY(-5px);
 }
 
-.top-right { top: -50px; right: -50px; transform: rotate(180deg); }
-.bottom-left { bottom: -50px; left: -50px; }
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
 
+.guest-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-red);
+}
+
+.guest-date {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.guest-address {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.guest-message {
+    font-family: 'Playfair Display', serif;
+    color: #444;
+    font-size: 1.05rem;
+}
+
+/* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.animate-fade-in {
-    animation: fadeIn 0.8s ease forwards;
+.animate-up {
+    animation: fadeIn 1s ease-out;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .wedding-card {
+        padding: 30px;
+    }
 }
