@@ -1,11 +1,14 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "ibnu-anjang/buku-tamu-laravel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Aplikasi buku tamu digital berbasis Laravel dengan CRUD admin dan database SQLite.",
     "keywords": [
         "laravel",
-        "framework"
+        "guestbook",
+        "buku-tamu",
+        "crud",
+        "sqlite"
     ],
     "license": "MIT",
     "require": {
